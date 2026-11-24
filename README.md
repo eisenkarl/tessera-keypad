@@ -8,7 +8,7 @@ lock, opens a garage door, switches a light or a switch, runs a script or a scen
 
 ## Set up
 
-1. In Tessera, open **Plugins**, choose **Add with a link** and paste `https://github.com/mifricke/tessera-keypad`.
+1. In Tessera, open **Plugins**, choose **Add with a link** and paste `https://github.com/eisenkarl/tessera-keypad`.
 2. Add the plugin to a screen. The screen builds once.
 3. In **Layout**, place the **Keypad** tile from the library's Plugins group.
 4. In the inspector, set **Entity 1** and **Code 1**. For more people or actions, fill **Entity 2** + **Code 2**,

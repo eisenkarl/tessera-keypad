@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.2
+- Maintainer set to `eisenkarl` (this fork).
+
 ## 0.8.1
 - Plugin API raised to 0.26 so more than 12 tile options (the eight code→entity pairs) are allowed.
 
