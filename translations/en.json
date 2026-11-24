@@ -1,0 +1,47 @@
+{
+  "_meta": {
+    "name": "English"
+  },
+  "screen": {
+    "choose": "Choose an entity",
+    "no_code": "Set a code",
+    "enter": "Enter the code",
+    "tap": "Tap to enter the code",
+    "wrong": "Wrong code",
+    "right": "Sent",
+    "failed": "Not sent. Is the screen connected?",
+    "blocked": "Try again in {n} s",
+    "locked": "Locked",
+    "unlocked": "Unlocked",
+    "open": "Open",
+    "closed": "Closed",
+    "on": "On",
+    "off": "Off",
+    "unavailable": "Unavailable",
+    "no_helper_code": "No code from Home Assistant",
+    "tap_lock": "Tap to lock",
+    "tap_close": "Tap to close",
+    "tap_off": "Tap to switch off"
+  },
+  "app": {
+    "name": "Keypad",
+    "summary": "A keypad on the screen: the right code unlocks a lock, opens a cover or switches a light, a script or a scene.",
+    "tile_name": "Keypad",
+    "tile_example": "Enter the code to switch it",
+    "card_name": "Keypad",
+    "target": "Entity",
+    "target_hint": "What the right code switches: a lock, a cover, a switch, a light, a script, a scene or a button.",
+    "code": "Code",
+    "code_hint": "One or more codes, 4 to 8 digits each, separated by commas (e.g. 1234,5678). The screen checks them, so they are stored on the screen: use for convenience, not as your only lock.",
+    "code_entity": "Code from a helper",
+    "code_entity_hint": "Instead of the code above: an input_text or text entity whose state is the code — one code, or several separated by commas (4 to 16 digits each). A new value there counts within seconds, without a build. The value is plain text in Home Assistant's history: leave the helper out of the recorder.",
+    "free_close": "Code only to open",
+    "free_close_hint": "On: a tap locks a lock, closes a cover or switches a light, switch or input boolean off at once, without the code. Unlocking, opening and switching on still take the code. Scripts, scenes and buttons always take it.",
+    "auto_check": "Check the code by itself",
+    "auto_check_hint": "On: the code is checked as soon as its last digit is typed. Off: only the check key checks it, so the keypad never tells how long the code is.",
+    "attempts": "Wrong tries",
+    "attempts_hint": "After this many wrong codes in a row the keypad waits before it takes another.",
+    "wait": "Wait after wrong tries",
+    "wait_hint": "How long the keypad waits, in seconds."
+  }
+}
