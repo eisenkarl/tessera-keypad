@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.1
+- Plugin API raised to 0.26 so more than 12 tile options (the eight code→entity pairs) are allowed.
+
 ## 0.8.0
 - Each code switches its **own** entity: up to eight pairs (Entity 1 + Code 1 … Entity 8 + Code 8) on one keypad tile.
   Typing a code runs the action only for that pair's entity.
