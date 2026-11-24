@@ -1,8 +1,11 @@
 # Changelog
 
+## 0.8.0
+- Each code switches its **own** entity: up to eight pairs (Entity 1 + Code 1 … Entity 8 + Code 8) on one keypad tile.
+  Typing a code runs the action only for that pair's entity.
+
 ## 0.7.0
-- Several codes on one keypad tile: type them separated by commas (or semicolon / slash), e.g. `1234,5678`.
-  Any of them opens. The same list works in a Home Assistant text helper under **Code from a helper**.
+- Several codes on one keypad tile (comma-separated) for the same entity — superseded by 0.8.0.
 
 ## 0.6.1
 - Ready for a coming Tessera that lets a keypad take the same key twice in a row: there, "1 1 2 3" typed quickly

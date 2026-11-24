@@ -11,10 +11,9 @@ lock, opens a garage door, switches a light or a switch, runs a script or a scen
 1. In Tessera, open **Plugins**, choose **Add with a link** and paste `https://github.com/mifricke/tessera-keypad`.
 2. Add the plugin to a screen. The screen builds once.
 3. In **Layout**, place the **Keypad** tile from the library's Plugins group.
-4. In the inspector, search for and choose the **Entity** the code switches, and fill in the **Code** (4 to 8 digits).
- Several people can each have a code: separate them with commas, e.g. `1234,5678,9012`. The list offers only
- entities the code can switch.
-5. Tap the tile on the screen, type any of the codes, and the action runs.
+4. In the inspector, set **Entity 1** and **Code 1**. For more people or actions, fill **Entity 2** + **Code 2**,
+ and so on (up to eight). Each code switches only its own entity.
+5. Tap the tile on the screen, type a code, and that pair's action runs.
 
 ## What the right code does
 
@@ -34,17 +33,13 @@ that script on the tile.
 
 ## Options
 
-- **Entity**: what the right code switches, chosen from a list you can search.
-- **Code**: the digits that open. Several codes: `1234,5678` (comma, semicolon or slash).
-- **Code only to open**: off (the default), every tap opens the keypad. On, a tap locks a lock, closes a cover or
-  switches a light, switch or input boolean off at once, without the code; the tile says so ("Tap to lock").
-  Unlocking, opening and switching on still take the code, and a script, a scene or a button always does.
-- **Check the code by itself**: on (the default), the keypad checks the code as soon as its last digit is typed, so
-  no check key is needed. Off, only the check key checks it: the keypad then never tells how long the code is.
-- **Code from a helper**: instead of typing the code into the tile, choose a helper in Home Assistant that holds it
-  (below). When a helper is chosen, its code counts and the **Code** above is not used.
-- **Wrong tries** and **Wait after wrong tries**: after this many wrong codes in a row the keypad takes no code for a
-  while and counts down.
+- **Entity 1 … Entity 8** and **Code 1 … Code 8**: each pair is independent. Leave unused pairs empty.
+- **Code only to open**: off (the default), every tap opens the keypad. On, a tap locks/closes/switches off
+ **Entity 1** without the code; unlocking and every other code still need their code.
+- **Check the code by itself**: on (the default), the keypad checks as soon as the last digit of a configured code
+ length is typed. Off, only the check key checks it.
+- **Code 1 from a helper**: optional; overrides **Code 1** only.
+- **Wrong tries** and **Wait after wrong tries**: after this many wrong codes in a row the keypad waits.
 
 ## The code from a helper in Home Assistant
 
@@ -53,8 +48,8 @@ opening Tessera and without building the screen again.
 
 1. In Home Assistant, open **Settings**, **Devices & services**, **Helpers**, and create a **Text** helper. Set its
    mode to **Password** so the code is hidden in the dashboard, and its maximum length to 16.
-2. Type the code as its value: 4 to 16 digits, or several codes separated by commas.
-3. In Tessera, choose that helper under **Code from a helper** on the tile.
+2. Type the code as its value: 4 to 16 digits (this is **Code 1** only).
+3. In Tessera, choose that helper under **Code 1 from a helper** on the tile.
 
 A new value counts within seconds, also on a keypad that is open. While the helper is unavailable, or holds anything
 but digits, the keypad takes no code at all and says so.
