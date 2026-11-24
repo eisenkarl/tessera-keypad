@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.1
+- The tile no longer shows the state of entity 1 (locked/on/…). It stays a generic keypad; each code still switches
+  its own entity.
+
 ## 0.9.0
 - Own plugin id `keypad_multi` (and ESPHome component), so it no longer replaces the original Keypad (`code_lock`).
 - Display name **Keypad Multi**.

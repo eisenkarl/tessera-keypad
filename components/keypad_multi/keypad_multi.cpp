@@ -186,14 +186,13 @@ class KeypadTile : public tessera::Tile {
   }
 
   void on_state(JsonObjectConst data) override {
-    // First entity drives the tile's name/state display.
+    // Keep entity-1 state only for free_close taps — the tile itself stays a generic keypad
+    // (no "locked"/"on" of the first entity), because each code has its own target.
     JsonObjectConst target = data["entities"]["target"];
-    if (!target["name"].isNull() && !name_[0]) std::strncpy(name_, target["name"] | "", sizeof(name_) - 1);
     std::strncpy(state_, target["state"] | "", sizeof(state_) - 1);
     if (lock_.from_entity && lock_.count > 0) {
       code_from_data(data, lock_.entries[0].code, sizeof(lock_.entries[0].code));
     }
-    // Refresh entity ids if Tessera resends options via entities.* (names only usually).
     paint();
   }
 
@@ -231,25 +230,18 @@ class KeypadTile : public tessera::Tile {
     const Entry &e0 = lock_.entries[0];
     if (!e0.entity[0] || !service_for(e0.entity)) return plugin_->text("choose");
     if (!lock_has_code(lock_)) return plugin_->text(lock_.from_entity ? "no_helper_code" : "no_code");
-    const char *s = state_;
-    if (!std::strcmp(s, "unavailable")) return plugin_->text("unavailable");
-    if (lock_.free_close && closing_service(e0.entity, s))
+    // free_close: only then mention what a tap without code does for entity 1.
+    if (lock_.free_close && closing_service(e0.entity, state_))
       return plugin_->text(std::strncmp(e0.entity, "lock.", 5) == 0   ? "tap_lock"
                            : std::strncmp(e0.entity, "cover.", 6) == 0 ? "tap_close"
                                                                         : "tap_off");
-    if (!std::strcmp(s, "locked")) return plugin_->text("locked");
-    if (!std::strcmp(s, "unlocked")) return plugin_->text("unlocked");
-    if (!std::strcmp(s, "open")) return plugin_->text("open");
-    if (!std::strcmp(s, "closed")) return plugin_->text("closed");
-    if (!std::strcmp(s, "on")) return plugin_->text("on");
-    if (!std::strcmp(s, "off") && std::strncmp(e0.entity, "script.", 7)) return plugin_->text("off");
     if (lock_.count > 1) return plugin_->text("tap_multi");
     return plugin_->text("tap");
   }
 
   void paint() {
-    const bool open = !std::strcmp(state_, "unlocked") || !std::strcmp(state_, "open");
-    ui::set_text(icon_, ui::icon(open ? ICON_LOCK_OPEN : ICON_LOCK));
+    // Always the closed-lock icon: this tile is not the status of entity 1.
+    ui::set_text(icon_, ui::icon(ICON_LOCK));
     ui::set_text(name_label_, name_);
     ui::set_text(line_, line());
     const bool roomy = ui::line_height(Font::ICON) + ui::px(4) + ui::line_height(Font::HEADLINE) +
