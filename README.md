@@ -1,7 +1,10 @@
-# Keypad
+# Keypad Multi
 
-A keypad on your Tessera screen. Type the right code and the screen runs an action in Home Assistant: it unlocks a
-lock, opens a garage door, switches a light or a switch, runs a script or a scene, or presses a button.
+A keypad on your Tessera screen with **several codes**, each switching its **own** entity. This is a separate plugin
+from the original [Keypad](https://github.com/mifricke/tessera-keypad) (`code_lock`); both can be installed at once.
+
+Type the right code and the screen runs an action in Home Assistant: it unlocks a lock, opens a garage door, switches
+a light or a switch, runs a script or a scene, or presses a button.
 
 > The code is checked on the screen, so it is stored in the screen's layout and on the screen itself. Use it for
 > convenience, such as letting family in, and not as the only protection of a door.

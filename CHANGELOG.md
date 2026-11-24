@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0
+- Own plugin id `keypad_multi` (and ESPHome component), so it no longer replaces the original Keypad (`code_lock`).
+- Display name **Keypad Multi**.
+
 ## 0.8.2
 - Maintainer set to `eisenkarl` (this fork).
 

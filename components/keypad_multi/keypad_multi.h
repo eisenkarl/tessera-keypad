@@ -2,7 +2,7 @@
 #include "esphome/core/component.h"
 #include "esphome/components/smart_display/plugin_api.h"
 
-namespace esphome::code_lock {
+namespace esphome::keypad_multi {
 
 static constexpr size_t MAX_ENTRIES = 8;
 
@@ -27,14 +27,14 @@ struct Lock {
 
 // The plugin: a tile that shows the first entity and opens the keypad, and the keypad card. It keeps the wrong tries
 // per tile across the card's openings, so closing and opening the keypad does not reset the wait.
-class CodeLock : public Component, public tessera::Plugin {
+class KeypadMulti : public Component, public tessera::Plugin {
  public:
   void setup() override;
   float get_setup_priority() const override { return setup_priority::DATA; }
 
   Lock chosen;
 
-  // Wrong tries of one keypad (the last few tiles seen; a screen has only a handful of code locks).
+  // Wrong tries of one keypad (the last few tiles seen; a screen has only a handful of keypads).
   struct Tries {
     char entity[96] = "";
     int wrong = 0;
@@ -47,4 +47,4 @@ class CodeLock : public Component, public tessera::Plugin {
   uint8_t next_ = 0;
 };
 
-}  // namespace esphome::code_lock
+}  // namespace esphome::keypad_multi

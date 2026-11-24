@@ -25,9 +25,9 @@
     "tap_off": "Tap to switch off"
   },
   "app": {
-    "name": "Keypad",
-    "summary": "A keypad: each code switches its own entity — a lock, cover, light, script or scene.",
-    "tile_name": "Keypad",
+    "name": "Keypad Multi",
+    "summary": "Keypad with several codes: each code switches its own entity. Can sit beside the original Keypad plugin.",
+    "tile_name": "Keypad Multi",
     "tile_example": "Enter the code to switch it",
     "card_name": "Keypad",
     "target": "Entity 1",

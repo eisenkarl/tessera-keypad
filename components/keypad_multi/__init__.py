@@ -1,4 +1,4 @@
-"""Code lock: the ESPHome side. This file stays this short: smart_display.register_plugin() reads the id, version,
+"""Keypad Multi: the ESPHome side. This file stays this short: smart_display.register_plugin() reads the id, version,
 tile memory and the screen's texts from the manifest and translations/ beside this folder (docs/FIRMWARE_API.md)."""
 import esphome.codegen as cg
 import esphome.config_validation as cv
@@ -8,10 +8,10 @@ from esphome.const import CONF_ID
 # The core component every Tessera screen has; the plugin API lives in it.
 DEPENDENCIES = ["smart_display"]
 
-code_lock_ns = cg.esphome_ns.namespace("code_lock")
-CodeLock = code_lock_ns.class_("CodeLock", cg.Component)
+keypad_multi_ns = cg.esphome_ns.namespace("keypad_multi")
+KeypadMulti = keypad_multi_ns.class_("KeypadMulti", cg.Component)
 
-CONFIG_SCHEMA = cv.Schema({cv.GenerateID(): cv.declare_id(CodeLock)}).extend(cv.COMPONENT_SCHEMA)
+CONFIG_SCHEMA = cv.Schema({cv.GenerateID(): cv.declare_id(KeypadMulti)}).extend(cv.COMPONENT_SCHEMA)
 
 
 async def to_code(config):

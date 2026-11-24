@@ -1,6 +1,6 @@
-# Keypad: a keypad on the screen. Each code switches its own entity in Home Assistant (up to eight pairs).
-id: code_lock
-version: 0.8.2
+# Keypad Multi: each code switches its own entity (up to eight pairs). Separate from the original Keypad (code_lock).
+id: keypad_multi
+version: 0.9.0
 api: "0.26"
 icon: lock
 maintainer: eisenkarl

@@ -1,4 +1,4 @@
-#include "code_lock.h"
+#include "keypad_multi.h"
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 #include <algorithm>
@@ -6,7 +6,7 @@
 #include <cstring>
 #include <string>
 
-namespace esphome::code_lock {
+namespace esphome::keypad_multi {
 
 using tessera::Font;
 using tessera::Tone;
@@ -147,7 +147,7 @@ static bool codes_have_length(const Lock &lock, size_t len) {
   return false;
 }
 
-CodeLock::Tries &CodeLock::tries(const char *entity) {
+KeypadMulti::Tries &KeypadMulti::tries(const char *entity) {
   for (auto &t : tries_)
     if (std::strcmp(t.entity, entity) == 0) return t;
   Tries &t = tries_[next_];
@@ -160,7 +160,7 @@ CodeLock::Tries &CodeLock::tries(const char *entity) {
 // ---- The tile ----
 class KeypadTile : public tessera::Tile {
  public:
-  explicit KeypadTile(CodeLock *plugin) : plugin_(plugin) {}
+  explicit KeypadTile(KeypadMulti *plugin) : plugin_(plugin) {}
 
   void create(const tessera::TileContext &c) override {
     width_ = c.width;
@@ -209,7 +209,7 @@ class KeypadTile : public tessera::Tile {
     const char *closing = lock_.free_close ? closing_service(entity0, state_) : nullptr;
     if (closing) {
       const bool sent = tessera::action(closing, entity0);
-      ESP_LOGI("code_lock", "Without the code: %s on %s %s", closing, entity0, sent ? "sent" : "NOT sent");
+      ESP_LOGI("keypad_multi", "Without the code: %s on %s %s", closing, entity0, sent ? "sent" : "NOT sent");
       (void) sent;
       return;
     }
@@ -282,7 +282,7 @@ class KeypadTile : public tessera::Tile {
     lv_obj_set_pos(line_, 0, y);
   }
 
-  CodeLock *plugin_;
+  KeypadMulti *plugin_;
   Lock lock_;
   char name_[48] = "", state_[24] = "";
   int width_ = 0, height_ = 0, tile_ = -1;
@@ -292,7 +292,7 @@ class KeypadTile : public tessera::Tile {
 // ---- The keypad card ----
 class KeysCard : public tessera::Card {
  public:
-  explicit KeysCard(CodeLock *plugin) : plugin_(plugin) {}
+  explicit KeysCard(KeypadMulti *plugin) : plugin_(plugin) {}
 
   void open(const tessera::CardContext &c) override {
     lock_ = plugin_->chosen;
@@ -516,8 +516,8 @@ class KeysCard : public tessera::Card {
     }
   }
 
-  static constexpr const char *TAG = "code_lock";
-  CodeLock *plugin_;
+  static constexpr const char *TAG = "keypad_multi";
+  KeypadMulti *plugin_;
   Lock lock_;
   char typed_[MAX_DIGITS + 1] = "";
   size_t typed_len_ = 0;
@@ -529,9 +529,9 @@ class KeysCard : public tessera::Card {
   lv_obj_t *keys_[12]{}, *labels_[12]{}, *dots_[MAX_DIGITS]{}, *line_{};
 };
 
-void CodeLock::setup() {
+void KeypadMulti::setup() {
   add_tile("keypad", [this]() { return new KeypadTile(this); });
   add_card("keys", [this]() { return new KeysCard(this); });
 }
 
-}  // namespace esphome::code_lock
+}  // namespace esphome::keypad_multi

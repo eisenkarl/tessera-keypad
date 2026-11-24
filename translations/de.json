@@ -25,9 +25,9 @@
     "tap_off": "Tippen zum Ausschalten"
   },
   "app": {
-    "name": "Keypad",
-    "summary": "Ein Tastenfeld: Jeder Code schaltet seine eigene Entität — Schloss, Tor, Licht, Skript oder Szene.",
-    "tile_name": "Keypad",
+    "name": "Keypad Multi",
+    "summary": "Tastenfeld mit mehreren Codes: Jeder Code schaltet seine eigene Entität. Parallel zum Original-Keypad nutzbar.",
+    "tile_name": "Keypad Multi",
     "tile_example": "Code eingeben, um zu schalten",
     "card_name": "Tastenfeld",
     "target": "Entität 1",
